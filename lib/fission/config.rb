@@ -19,9 +19,12 @@ module Fission
     def initialize
       @attributes = {}
 
+      fusion3_bin = '/Library/Application Support/VMware Fusion/vmrun'
+      fusion4_bin = '/Applications/VMware Fusion.app/Contents/Library/vmrun'
+
       @attributes['vm_dir'] = File.expand_path('~/Documents/Virtual Machines.localized/')
       @attributes['lease_file'] = '/var/db/vmware/vmnet-dhcpd-vmnet8.leases'
-      @attributes['vmrun_bin'] = '/Library/Application Support/VMware Fusion/vmrun'
+      @attributes['vmrun_bin'] = File.exists?(fusion4_bin) ? fusion4_bin : fusion3_bin
       @attributes['plist_file'] = File.expand_path('~/Library/Preferences/com.vmware.fusion.plist')
       @attributes['gui_bin'] = File.expand_path('/Applications/VMware Fusion.app/Contents/MacOS/vmware')
 
